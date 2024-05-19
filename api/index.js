@@ -5,28 +5,13 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const multer = require('multer');
 require('dotenv').config();
-
+const connectToDatabase = require('../db/connect');
 const User = require('../models/user'); // Import the User model
 const Profile = require('../models/profile');
-
 const app = express();
 app.use(cors());
 app.use(express.json()); // Replaces bodyParser.json()
-
-const port = process.env.PORT || 3001;
-const jwtSecret = process.env.JWT_SECRET || 'defaultsecret';
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://bhaw:EuD5a8qKB7OMsN1H@cluster0.l3swca3.mongodb.net/social_media?retryWrites=true&w=majority&appName=Cluster0";
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log("Connected to MongoDB Atlas database");
-}).catch(err => {
-  console.error('Error connecting to MongoDB Atlas:', err);
-});
+const port = process.env.PORT || 3000;
 
 // Test endpoint
 app.get('/test', (req, res) => {
@@ -47,6 +32,7 @@ const upload = multer({ storage: storage });
 
 // API endpoint for uploading profile picture
 app.post('/api/upload-profile-pic/:username', upload.single('profilePic'), async (req, res) => {
+  await connectToDatabase();
   const { username } = req.params;
   const { path } = req.file;
   const {bio} = req.body.bio; // Path where the uploaded file is saved
@@ -77,6 +63,7 @@ app.post('/api/upload-profile-pic/:username', upload.single('profilePic'), async
 
 // Signup endpoint
 app.post('/signup', async (req, res) => {
+  await connectToDatabase();
   try {
     console.log('Received signup request:', req.body);
 
@@ -111,6 +98,7 @@ app.post('/signup', async (req, res) => {
 
 // Login endpoint
 app.post('/login', async (req, res) => {
+  await connectToDatabase();
   try {
     const { username, password } = req.body;
 
@@ -125,7 +113,7 @@ app.post('/login', async (req, res) => {
     if (!validPassword) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
-
+    const jwtSecret = process.env.JWT_SECRET;
     // Generate JWT token
     const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
 
@@ -137,6 +125,7 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/users/:username', async (req, res) => {
+  await connectToDatabase();
   const username = req.params.username;
   try {
     const user = await User.findOne({ username }); // Find user by password
