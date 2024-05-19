@@ -6,14 +6,14 @@ const cors = require('cors');
 const multer = require('multer');
 require('dotenv').config();
 
-const User = require('./models/user'); // Import the User model
-const Profile = require('./models/profile');
+const User = require('../models/user'); // Import the User model
+const Profile = require('../models/profile');
 
 const app = express();
 app.use(cors());
 app.use(express.json()); // Replaces bodyParser.json()
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const jwtSecret = process.env.JWT_SECRET || 'defaultsecret';
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
