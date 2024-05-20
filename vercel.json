@@ -11,7 +11,8 @@
       { "src": "/api/signup", "dest": "/api/signup.js" },
       { "src": "/api/login", "dest": "/api/login.js" },
       { "src": "/api/upload-profile-pic/(.*)", "dest": "/api/upload-profile-pic.js" },
-      { "src": "/api/users/(.*)", "dest": "/api/users/[username].js" }
+      { "src": "/api/users/(.*)", "dest": "/api/users/[username].js" },
+      { "source": "/api/(.*)", "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }] }
     ],
     "env": {
         "MONGODB_URI": "mongodb+srv://bhaw:EuD5a8qKB7OMsN1H@cluster0.l3swca3.mongodb.net/social_media?retryWrites=true&w=majority&appName=Cluster0",
@@ -19,9 +20,7 @@
       },
       
       
-        "headers": [
-          { "source": "/api/(.*)", "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }] }
-        ]
+       
       
   }
   
