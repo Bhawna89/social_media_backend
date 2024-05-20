@@ -4,9 +4,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const app = express();
 const connectToDatabase = require('../db/connect.js')
-const corsMiddleware = require('./cors');
-
-app.use(corsMiddleware);
 
 app.use(express.json());
 
