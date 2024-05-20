@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "api/**/*.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      { "src": "/api/test", "dest": "/api/test.js" },
+      { "src": "/api/signup", "dest": "/api/signup.js" },
+      { "src": "/api/login", "dest": "/api/login.js" },
+      { "src": "/api/upload-profile-pic/(.*)", "dest": "/api/upload-profile-pic.js" },
+      { "src": "/api/users/(.*)", "dest": "/api/users/[username].js" }
+    ]
+  }
+  
