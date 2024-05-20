@@ -3,10 +3,15 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const app = express();
+const cors = require('cors');
 const connectToDatabase = require('../db/connect.js')
 
 app.use(express.json());
-
+app.use(cors({
+    origin: '*', // Allow all origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these methods
+    allowedHeaders: ['Content-Type', 'Authorization'] // Allow these headers
+  }));
 app.post('/api/login', async (req, res) => {
     await connectToDatabase();
   try {

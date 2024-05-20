@@ -2,6 +2,13 @@ const express = require('express');
 const User = require('../../models/user');
 const app = express();
 const connectToDatabase = require('../../db/connect');
+const cors = require('cors');
+
+app.use(cors({
+    origin: '*', // Allow all origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these methods
+    allowedHeaders: ['Content-Type', 'Authorization'] // Allow these headers
+  }));
 
 app.get('/api/users/:username', async (req, res) => {
     await connectToDatabase();
