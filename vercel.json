@@ -17,10 +17,7 @@
     "env": {
         "MONGODB_URI": "mongodb+srv://bhaw:EuD5a8qKB7OMsN1H@cluster0.l3swca3.mongodb.net/social_media?retryWrites=true&w=majority&appName=Cluster0",
         "JWT_SECRET": "3dkafd3io23idakjAD"
-      },
-      
-      
-       
+      }
       
   }
   
