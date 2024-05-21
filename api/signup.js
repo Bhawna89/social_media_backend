@@ -5,7 +5,7 @@ const app = express();
 const connectToDatabase = require('../db/connect.js');
 const cors = require('cors');
 app.use(cors({
-  origin: 'http://your-allowed-origin.com',
+  origin: '*',
   methods: 'GET,POST,PUT,DELETE,OPTIONS',
   allowedHeaders: 'Content-Type,Authorization',
   credentials: true
