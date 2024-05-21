@@ -6,30 +6,49 @@ const app = express();
 const connectToDatabase = require('../db/connect.js');
 const corsMiddleware = require('./cors');
 
-app.use(corsMiddleware);
+// Middleware to parse JSON request bodies
 app.use(express.json());
 
-app.post('/api/login', async (req, res) => {
-    console.log(req.body);
-    await connectToDatabase();
-  try {
-    console.log("login request received");
-    const { username, password } = req.body;
-    console
-    const user = await User.findOne({ username });
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid username or password' });
-    }
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) {
-      return res.status(401).json({ message: 'Invalid username or password' });
-    }
-    console.log(process.env.JWT_SECRET);
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.status(200).json({ token });
-  } catch (err) {
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
 
-module.exports = app;
+
+
+export default async function  handler(req, res) {
+    await connectToDatabase();
+    if (req.method === 'POST')  {
+        try {
+      const {username , password} = req.body;
+      console.log(username);
+      console.log(password);
+      const user = await User.findOne({ username });
+      console.log(user);
+        // If user not found, return error
+        if (!user) {
+            return {
+                statusCode: 401,
+                body: JSON.stringify({ message: 'Invalid username or password' })
+            };
+        }
+
+        // Compare passwords
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) {
+            return {
+                statusCode: 401,
+                body: JSON.stringify({ message: 'Invalid username or password' })
+            };
+        }
+  // Generate JWT token
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+       
+        res.status(200).json({ token });
+    } 
+    catch(err)
+    {
+        console.error('Error:', err);
+       
+            res.status(500).json({message: err.message});
+    }
+    } else {
+      // Handle any other HTTP method
+    }
+  }
