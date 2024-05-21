@@ -12,31 +12,31 @@
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Authorization, Content-Type",
-        "Access-Control-Allow-Credentials": "true"
+        "Access-Control-Allow-Credentials": "false"
       } },
       { "src": "/api/signup", "dest": "/api/signup.js","headers": {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Authorization, Content-Type",
-        "Access-Control-Allow-Credentials": "true"
+        "Access-Control-Allow-Credentials": "false"
       } },
       { "src": "/api/login", "dest": "/api/login.js" ,"headers": {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Authorization, Content-Type",
-        "Access-Control-Allow-Credentials": "true"
+        "Access-Control-Allow-Credentials": "false"
       }},
       { "src": "/api/upload-profile-pic/(.*)", "dest": "/api/upload-profile-pic.js" ,"headers": {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Authorization, Content-Type",
-        "Access-Control-Allow-Credentials": "true"
+        "Access-Control-Allow-Credentials": "false"
       }},
       { "src": "/api/user", "dest": "/api/user.js" ,"headers": {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Authorization, Content-Type",
-        "Access-Control-Allow-Credentials": "true"
+        "Access-Control-Allow-Credentials": "false"
       }}
     ],
     "env": {
