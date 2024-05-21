@@ -2,8 +2,13 @@ const express = require('express');
 const app = express();
 
 const corsMiddleware = require('./cors');
+app.use(cors({
+  origin: 'http://your-allowed-origin.com',
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  allowedHeaders: 'Content-Type,Authorization',
+  credentials: true
+}));
 
-app.use(corsMiddleware);
 app.get('/api/test', (req, res) => {
   res.send('Server is working!');
 });
