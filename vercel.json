@@ -8,7 +8,12 @@
     ],
     "routes": [
         
-      { "src": "/api/test", "dest": "/api/test.js" },
+      { "src": "/api/test", "dest": "/api/test.js","headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Authorization, Content-Type",
+        "Access-Control-Allow-Credentials": "true"
+      } },
       { "src": "/api/signup", "dest": "/api/signup.js" },
       { "src": "/api/login", "dest": "/api/login.js" },
       { "src": "/api/upload-profile-pic/(.*)", "dest": "/api/upload-profile-pic.js" },
